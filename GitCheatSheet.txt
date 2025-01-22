@@ -1,0 +1,103 @@
+Introduction to Git and Git Hub - Module 2 Cheat Sheet
+
+Command:	git --version
+Description: Displays current version of installed git.
+
+Command:	git config --global user.email "<email>"
+Description: Sets email for repo
+syntax: git config --global user.email "mbwilder1@senators.ws.edu"
+
+Command: 	git config --global user.name "<name>"
+Description: Sets user name for repo
+syntax: git config --global user.name "Matthew Wilder"
+
+Command:	git config -l
+Description: Gets git's configuration
+syntax: git config -l
+
+Command:	git init
+Description: Creates new git repo
+syntax: git init
+
+Command:	git status
+Description: shows status of the current repo
+syntax: git status
+
+
+Command:	git log
+Description: Shows history of commits
+syntax: git log
+
+Command:	git log -p
+Decription:	shows patch created by commits
+Syntax:		git log -p
+
+Command:	git log -p <#>
+Decription:	Shows patch of specific commit using git hash id
+Syntax:		git log -p <#>
+
+Command:	git log --stat
+Description:	Outputs stats about changed commits
+Syntax:		git log -- stat
+
+Command:	git log --graph -- oneline
+Description:	Shows simplified graph view of commit history
+Syntax:		git log --graph --oneline
+
+Command:	git add <file name>
+Description: Adds file to the staging area
+syntax: git add Module1CheatSheet.txt
+
+Command: 	git add -p
+Description:	Adds specific parts of a file to staging
+syntax:	git add -p Module1CheatSheet.txt
+
+Command: 	git add *
+Description:	adds all files to staging
+syntax:		git add *
+
+
+Command:	git commit
+Description: Commits files in staging area to repo
+syntax: git commit
+
+
+Command:	git commit -m "<message>"
+Description: Commits files from staging area to repo along with message"
+syntax: git commit -m "Changed text in Module1CheatSheet.txt file"
+
+Command:	git show
+Description:	Used to show info about specific commit based on id
+Synatx: 	git show
+
+Command: 	git diff
+Description:	Shows changes between last commit and working directory
+Syntax:		git diff
+
+Command:	git rm
+Description:	removes files from directory
+Syntax:		git rm file.txt
+
+Command:	git mv
+Description:	Moves file to another directory. Can also be used to rename file.
+Syntax:		git mv file.txt /c/filedestination
+
+Command:	git reset
+Description:	Unstage a file
+Syntax:		git reset
+
+Command: 	git reset -p
+Description:	Unstage specific parts of a file
+Syntax:		git reset -p
+
+Command:	git revert
+Description:	Rollback to previous commit
+Syntax:		git revert HEAD | <commit id>
+
+Command: 	git checkout
+Description:	Undo changes to a tracked file that you do not want to commit
+Syntax:		git checkout <file name>
+
+Command:	git checkout -p
+Description:	Undo changes of specific parts of a file.
+Syntax:		git checkout -p
