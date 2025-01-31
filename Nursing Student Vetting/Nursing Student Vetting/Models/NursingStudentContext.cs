@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
+using System.Security.Claims;
 
 
 public class NursingStudentContext : DbContext
@@ -39,12 +41,16 @@ public class NursingStudentContext : DbContext
         modelBuilder.Entity<StudentClass>()
             .HasOne(sc => sc.Class)
             .WithMany(c => c.StudentClasses)
-            .HasForeignKey(sc => sc.class_ID);
+            .HasForeignKey(sc => new { sc.class_ID, sc.category_ID });
+
+        modelBuilder.Entity<Class>()
+            .HasKey(c => new { c.class_ID, c.category_ID });
 
         modelBuilder.Entity<Class>()
             .HasOne(c => c.Category)
             .WithMany(cc => cc.Classes)
-            .HasForeignKey(c => c.Category_ID);
+            .HasForeignKey(c => c.category_ID)
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Student>()
             .Property(s => s.student_ID)
@@ -52,10 +58,10 @@ public class NursingStudentContext : DbContext
 
         // Seed data for ClassCategories
         modelBuilder.Entity<ClassCategory>().HasData(
-            new ClassCategory { category_ID = 1, categoryName = "Agriculture", categoryPrefix = "AGRM" },
-            new ClassCategory { category_ID = 2, categoryName = "Anthropology", categoryPrefix = "ANTH" },
-            new ClassCategory { category_ID = 3, categoryName = "Accounting", categoryPrefix = "ACCT" },
-            new ClassCategory { category_ID = 4, categoryName = "Agriculture", categoryPrefix = "AGRI" },
+            new ClassCategory { category_ID = 1, categoryName = "Accounting", categoryPrefix = "ACCT" },
+            new ClassCategory { category_ID = 2, categoryName = "Agriculture", categoryPrefix = "AGRI" },
+            new ClassCategory { category_ID = 3, categoryName = "Agriculture", categoryPrefix = "AGRM" },
+            new ClassCategory { category_ID = 4, categoryName = "Anthropology", categoryPrefix = "ANTH" },
             new ClassCategory { category_ID = 5, categoryName = "Art", categoryPrefix = "ART" },
             new ClassCategory { category_ID = 6, categoryName = "Art Performance", categoryPrefix = "ARTP" },
             new ClassCategory { category_ID = 7, categoryName = "Astronomy", categoryPrefix = "ASTR" },
@@ -112,6 +118,40 @@ public class NursingStudentContext : DbContext
             new ClassCategory { category_ID = 58, categoryName = "Surgical Technology", categoryPrefix = "SURG" },
             new ClassCategory { category_ID = 59, categoryName = "Theatre", categoryPrefix = "THEA" },
             new ClassCategory { category_ID = 60, categoryName = "Women/Gender Studies", categoryPrefix = "WGST" }
+        );
+
+        // Seed data for Classes
+        modelBuilder.Entity<Class>().HasData(
+            new Class { class_ID = 2010, className = "Human Anatomy and Physiology I", creditHours = 3, category_ID = 8, isRequired = true },
+            new Class { class_ID = 1010, className = "Principles of Accounting I", creditHours = 3, category_ID = 1, isRequired = false }
+        );
+
+        // Seed data for Students
+        modelBuilder.Entity<Student>().HasData(
+            new Student { student_ID = 00001001, firstName = "John", lastName = "Doe", email = "john.doe@example.com", address = "123 Example St", DoB = new DateTime(2000, 1, 1), gender = "Male", startDate = new DateTime(2020, 8, 1), graduationDate = new DateTime(2024, 5, 15) },
+            new Student { student_ID = 00001002, firstName = "Jane", lastName = "Smith", email = "jane.smith@example.com", address = "456 Example Ave", DoB = new DateTime(1999, 5, 15), gender = "Female", startDate = new DateTime(2021, 1, 5), graduationDate = new DateTime(2025, 5, 15) }
+        );
+
+        // Seed data for Tests
+        modelBuilder.Entity<Test>().HasData(
+            new Test { test_ID = 1, testName = "ACT", gradingScale = 36 },
+            new Test { test_ID = 2, testName = "Designated Test", gradingScale = 100 }
+        );
+
+        // Seed data for StudentTests
+        modelBuilder.Entity<StudentTest>().HasData(
+            new StudentTest { test_ID = 1, attemptNumber = 1, student_ID = 00001001, score = 22 },
+            new StudentTest { test_ID = 2, attemptNumber = 1, student_ID = 00001001, score = 74},
+            new StudentTest { test_ID = 2, attemptNumber = 2, student_ID = 00001001, score = 94 },
+            new StudentTest { test_ID = 2, attemptNumber = 1, student_ID = 00001002, score = 92 }
+        );
+
+        // Seed data for StudentClasses
+        modelBuilder.Entity<StudentClass>().HasData(
+            new StudentClass { class_ID = 2010, student_ID = 00001001, category_ID = 8, letterGrade = "B" },
+            new StudentClass { class_ID = 1010, student_ID = 00001002, category_ID = 1, letterGrade = "A" },
+            new StudentClass { class_ID = 2010, student_ID = 00001002, category_ID = 8, letterGrade = "C" },
+            new StudentClass { class_ID = 1010, student_ID = 00001001, category_ID = 1, letterGrade = "A" }
         );
     }
 }
