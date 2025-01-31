@@ -3,7 +3,7 @@
 
 public class NursingStudentContext : DbContext
 {
-    public NursingStudentContext(DbContextOptions<StudentContext> options) : base(options) { }
+    public NursingStudentContext(DbContextOptions<NursingStudentContext> options) : base(options) { }
 
     public DbSet<Student> Students { get; set; }
     public DbSet<Test> Tests { get; set; }
