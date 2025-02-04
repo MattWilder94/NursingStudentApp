@@ -16,7 +16,7 @@ public class NursingStudentContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<StudentTest>()
-            .HasKey(st => new { st.TestID, st.attemptNumber, st.StudentID });
+            .HasKey(st => new { st.TestID, st.AttemptNumber, st.StudentID });
 
         modelBuilder.Entity<StudentClass>()
             .HasKey(sc => new { sc.ClassID, sc.StudentID });
@@ -126,8 +126,8 @@ public class NursingStudentContext : DbContext
 
         // Seed data for Students
         modelBuilder.Entity<Student>().HasData(
-            new Student { StudentID = 00001001, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", Address = "123 Example St", DateOfBirth = new DateTime(2000, 1, 1), Gender = "Male", startDate = new DateTime(2020, 8, 1), GraduationDate = new DateTime(2024, 5, 15) },
-            new Student { StudentID = 00001002, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com", Address = "456 Example Ave", DateOfBirth = new DateTime(1999, 5, 15), Gender = "Female", startDate = new DateTime(2021, 1, 5) }
+            new Student { StudentID = 00001001, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", Address = "123 Example St", DateOfBirth = new DateTime(2000, 1, 1), Gender = "Male", StartDate = new DateTime(2020, 8, 1), GraduationDate = new DateTime(2024, 5, 15) },
+            new Student { StudentID = 00001002, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com", Address = "456 Example Ave", DateOfBirth = new DateTime(1999, 5, 15), Gender = "Female", StartDate = new DateTime(2021, 1, 5) }
         );
 
         // Seed data for Tests
