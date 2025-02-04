@@ -1,0 +1,33 @@
+1. As a Nursing program administrator, Janene needs to add a student to the database.
+2. As a Nursing program administrator, Janene needs to be able to edit students' information.
+3. As a Nursing program administrator, Janene wants to be able to automatically pull students grades from the school's system.
+4. As a Nursing program administrator, Janene needs to be able to setup users' accounts as either administrator, analyst, or student.
+5. As a Nursing program administrator, Janene needs a quick way to calculate each students' GPA.
+6. As a Nursing program administrator, Janene needs to calculate the quality points for each class each student has completed.
+7. As a Nursing program administrator, Janene needs a quick way to see if the student is eligible to be in the nursing program.
+8. As a Nursing program administrator, Janene needs to be able to adjust privileges of accounts.
+9. As a Nursing program administrator, Janene needs to verify that each user is who they say they are.
+
+Matthew
+
+10. As a Nursing Program Administrator, Janene needs a way to quickly view students information.
+11. As a Educational Data Analyst, Karson needs a way to sort student data by grade.
+12. As a Educational Data Analyst, Karson wants a feature to average students grades together.
+13. As a Educational Data Analyst, Karson needs a way to export all students nonidentifiable info.
+14. As a Educational Data Analyst, Karson needs a way to view info about each graduating class by year.
+15. As a Educational Data Analyst, Karson also would like a way to view info by age.
+16. As a Educational Data Analyst, Karson would like a way to view info by gender.
+17. As a Educational Data Analyst, Karson would also like a way to view info from a range of years.
+18. As a Educational Data Analyst, Karson would also like a way to view info comparing the rest of the school.
+
+Angela
+
+19. As a Nursing program administrator, Janene needs to see a full list of prerequisite classes that the student has completed and those still uncompleted.
+20. As a Student of the Nursing program, Kiley needs a progress bar to indicate the percentage of prerequisite classes completed.
+21. As a Student of the Nursing program, Kiley needs an automated email system that notifies students when their information has been updates in the system.
+22. As a Nursing program administrator, Janene needs a way to view entry-level salaries of previously graduated students to help inform prospective students.
+23. As a Nursing program administrator, Janene needs an update history for each student's profile, to maintain accountability.
+24. As a Student of the Nursing program, Kiley needs a ticket system to handle inquiries about incorrect information.
+25. As a Student of the Nursing program, Kiley needs a way to see how her grades compare to the class average.
+26. As a Student of the Nursing program, Kiley needs a feature to delete information inserted in error.
+27. As a Student of the Nursing program, Kiley needs to check her schedule for upcoming classes.
