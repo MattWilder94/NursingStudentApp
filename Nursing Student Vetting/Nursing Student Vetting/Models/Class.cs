@@ -8,6 +8,7 @@ namespace Nursing_Student_Vetting.Models
         public int ClassID { get; set; } // primary key
 
         public int CategoryID { get; set; } // foreign key
+        public ClassCategories Category {  get; set; }
 
         [Required(ErrorMessage = "Please enter a class name")]
         public string ClassName { get; set; } = String.Empty;

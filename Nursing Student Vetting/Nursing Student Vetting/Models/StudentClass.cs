@@ -4,10 +4,12 @@ namespace Nursing_Student_Vetting.Models
 {
     public class StudentClass
     {
-        // primary key
+        [Key]
         public int ClassID { get; set; }
-
+        public Class Class { get; set; }
+        [Required]
         public int StudentID { get; set; } // foreign key
+        public Student Student { get; set; }
 
         [Required(ErrorMessage = "Please enter a letter grade")]
         

@@ -10,6 +10,6 @@ namespace Nursing_Student_Vetting.Models
         public string TestName { get; set; } = String.Empty;
 
         [Required(ErrorMessage = "Please enter a grading scale")]
-        public string GradingScale { get; set; } = String.Empty;
+        public int GradingScale { get; set; }
     }
 }
