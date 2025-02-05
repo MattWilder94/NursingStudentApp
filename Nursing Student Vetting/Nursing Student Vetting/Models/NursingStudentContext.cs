@@ -12,7 +12,7 @@ public class NursingStudentContext : DbContext
     public DbSet<Test> Tests { get; set; }
     public DbSet<StudentTest> StudentTests { get; set; }
     public DbSet<Class> Classes { get; set; }
-    public DbSet<ClassCategory> ClassCategories { get; set; }
+    public DbSet<ClassCategories> ClassCategories { get; set; }
     public DbSet<StudentClass> StudentClasses { get; set; }
 
 
