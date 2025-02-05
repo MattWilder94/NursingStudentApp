@@ -29,7 +29,6 @@ namespace Nursing_Student_Vetting.Models
         [Required(ErrorMessage = "Please enter a starting date")]
         public DateOnly StartDate { get; set; }
 
-        [Required(ErrorMessage = "Please enter a graduation state")]
         public DateOnly GraduationDate { get; set;}
     }
 }

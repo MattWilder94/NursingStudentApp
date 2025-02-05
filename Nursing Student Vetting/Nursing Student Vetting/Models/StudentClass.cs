@@ -12,7 +12,7 @@ namespace Nursing_Student_Vetting.Models
         [Required(ErrorMessage = "Please enter a letter grade")]
         
         // Not sure if this is auto implemented of not??
-        public string LetterGrade { get; set; } = String.Empty;
+        public char LetterGrade { get; set; }
 
     }
 }
