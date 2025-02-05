@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Nursing_Student_Vetting.Models;
+
+using Microsoft.EntityFrameworkCore;
+
 
 
 public class NursingStudentContext : DbContext
