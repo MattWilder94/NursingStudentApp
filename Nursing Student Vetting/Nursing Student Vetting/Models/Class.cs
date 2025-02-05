@@ -4,10 +4,10 @@ namespace Nursing_Student_Vetting.Models
 {
     public class Class
     {
-        
+        [Required(ErrorMessage = "Please enter a Class Id")]
         public int ClassID { get; set; } // primary key
 
-        public int categoryID { get; set; } // foreign key
+        public int CategoryID { get; set; } // foreign key
 
         [Required(ErrorMessage = "Please enter a class name")]
         public string ClassName { get; set; } = String.Empty;
@@ -18,6 +18,6 @@ namespace Nursing_Student_Vetting.Models
 
         // not sure if this should be a string or a bool?
 
-        public string IsRequired { get; set; } = String.Empty;
+        public bool IsRequired { get; set; }
     }
 }
