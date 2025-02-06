@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 
 
+
 public class NursingStudentContext : DbContext
 {
-
     public NursingStudentContext(DbContextOptions<NursingStudentContext> options) : base(options) { }
 
     public DbSet<Student> Students { get; set; }
@@ -21,7 +21,7 @@ public class NursingStudentContext : DbContext
             .HasKey(st => new { st.TestID, st.AttemptNumber, st.StudentID });
 
         modelBuilder.Entity<StudentClass>()
-            .HasKey(sc => new { sc.ClassID, sc.StudentID });
+            .HasKey(sc => new { sc.ClassID, sc.CategoryID, sc.StudentID });
 
         modelBuilder.Entity<StudentTest>()
             .HasOne(st => st.Test)
@@ -41,10 +41,10 @@ public class NursingStudentContext : DbContext
         modelBuilder.Entity<StudentClass>()
             .HasOne(sc => sc.Class)
             .WithMany(c => c.StudentClasses)
-            .HasForeignKey(sc => new { sc.ClassID });
+            .HasForeignKey(sc => new { sc.ClassID, sc.CategoryID });
 
         modelBuilder.Entity<Class>()
-            .HasKey(c => new { c.ClassID, c.CategoryID });
+            .HasKey(c => new { c.ClassID, c.CategoryID }); // Composite key
 
         modelBuilder.Entity<Class>()
             .HasOne(c => c.Category)
@@ -118,6 +118,7 @@ public class NursingStudentContext : DbContext
             new ClassCategories { CategoryID = 58, CategoryName = "Surgical Technology", CategoryPrefix = "SURG" },
             new ClassCategories { CategoryID = 59, CategoryName = "Theatre", CategoryPrefix = "THEA" },
             new ClassCategories { CategoryID = 60, CategoryName = "Women/Gender Studies", CategoryPrefix = "WGST" }
+
         );
 
         // Seed data for Classes
@@ -140,6 +141,7 @@ public class NursingStudentContext : DbContext
 
         // Seed data for StudentTests
         modelBuilder.Entity<StudentTest>().HasData(
+
             new StudentTest { TestID = 1, AttemptNumber = 1, StudentID = 00001001, Score = 22 },
             new StudentTest { TestID = 2, AttemptNumber = 1, StudentID = 00001001, Score = 74},
             new StudentTest { TestID = 2, AttemptNumber = 2, StudentID = 00001001, Score = 94 },
@@ -148,11 +150,10 @@ public class NursingStudentContext : DbContext
 
         // Seed data for StudentClasses
         modelBuilder.Entity<StudentClass>().HasData(
-            new StudentClass { ClassID = 2010, StudentID = 00001001, CategoryID = 8, LetterGrade = "B" },
-            new StudentClass { ClassID = 1010, StudentID = 00001002, CategoryID = 1, LetterGrade = "A" },
-            new StudentClass { ClassID = 2010, StudentID = 00001002, CategoryID = 8, LetterGrade = "C" },
-            new StudentClass { ClassID = 1010, StudentID = 00001001, CategoryID = 1, LetterGrade = "A" }
-
+            new StudentClass { ClassID = 2010, CategoryID = 8,  StudentID = 00001001, LetterGrade = "B" },
+            new StudentClass { ClassID = 1010, CategoryID = 1, StudentID = 00001002, LetterGrade = "A" },
+            new StudentClass { ClassID = 2010, CategoryID = 8, StudentID = 00001002, LetterGrade = "C" },
+            new StudentClass { ClassID = 1010, CategoryID = 1, StudentID = 00001001, LetterGrade = "A" }
         );
     }
 }

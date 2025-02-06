@@ -11,5 +11,7 @@ namespace Nursing_Student_Vetting.Models
 
         [Required(ErrorMessage = "Please enter a grading scale")]
         public int GradingScale { get; set; }
+
+        public ICollection<StudentTest> StudentTests { get; set; }
     }
 }

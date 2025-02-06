@@ -4,6 +4,7 @@ namespace Nursing_Student_Vetting.Models
 {
     public class ClassCategories
     {
+        [Key]
         public int CategoryID { get; set; }
 
         [Required(ErrorMessage = "Please enter a category")]
@@ -11,5 +12,7 @@ namespace Nursing_Student_Vetting.Models
 
         [Required(ErrorMessage = "Please enter a prefix")]
         public string CategoryPrefix { get; set; } = String.Empty;
+
+        public ICollection<Class> Classes { get; set; }
     }
 }

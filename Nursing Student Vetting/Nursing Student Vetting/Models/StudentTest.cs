@@ -13,7 +13,7 @@ namespace Nursing_Student_Vetting.Models
         public Student Student {  get; set; }
 
         [Required(ErrorMessage = "Please enter a test score")]
-        public int TestScore { get; set; }
+        public int Score { get; set; }
         
         public int AttemptNumber { get; set; }
     }

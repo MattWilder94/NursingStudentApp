@@ -15,12 +15,7 @@ namespace Nursing_Student_Vetting.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return RedirectToAction("List", "Students");
         }
     }
 }
