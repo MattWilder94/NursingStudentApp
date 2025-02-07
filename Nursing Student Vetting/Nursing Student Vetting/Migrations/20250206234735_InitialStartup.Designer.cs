@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Nursing_Student_Vetting.Migrations
 {
     [DbContext(typeof(NursingStudentContext))]
-    [Migration("20250206225818_InitialStartup")]
+    [Migration("20250206234735_InitialStartup")]
     partial class InitialStartup
     {
         /// <inheritdoc />
