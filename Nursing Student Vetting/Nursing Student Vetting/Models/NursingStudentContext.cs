@@ -1,5 +1,4 @@
-﻿using Nursing_Student_Vetting.Models;
-
+using Nursing_Student_Vetting.Models;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -22,7 +21,7 @@ public class NursingStudentContext : DbContext
             .HasKey(st => new { st.TestID, st.AttemptNumber, st.StudentID });
 
         modelBuilder.Entity<StudentClass>()
-            .HasKey(sc => new { sc.ClassID, sc.StudentID });
+            .HasKey(sc => new { sc.ClassID, sc.CategoryID, sc.StudentID });
 
         modelBuilder.Entity<StudentTest>()
             .HasOne(st => st.Test)
@@ -45,7 +44,7 @@ public class NursingStudentContext : DbContext
             .HasForeignKey(sc => new { sc.ClassID, sc.CategoryID });
 
         modelBuilder.Entity<Class>()
-            .HasKey(c => new { c.ClassID, c.CategoryID });
+            .HasKey(c => new { c.ClassID, c.CategoryID }); // Composite key
 
         modelBuilder.Entity<Class>()
             .HasOne(c => c.Category)
@@ -58,67 +57,68 @@ public class NursingStudentContext : DbContext
             .ValueGeneratedNever();
 
         // Seed data for ClassCategories
-        modelBuilder.Entity<ClassCategory>().HasData(
-            new ClassCategory { CategoryID = 1, CategoryName = "Accounting", CategoryPrefix = "ACCT" },
-            new ClassCategory { CategoryID = 2, CategoryName = "Agriculture", CategoryPrefix = "AGRI" },
-            new ClassCategory { CategoryID = 3, CategoryName = "Agriculture", CategoryPrefix = "AGRM" },
-            new ClassCategory { CategoryID = 4, CategoryName = "Anthropology", CategoryPrefix = "ANTH" },
-            new ClassCategory { CategoryID = 5, CategoryName = "Art", CategoryPrefix = "ART" },
-            new ClassCategory { CategoryID = 6, CategoryName = "Art Performance", CategoryPrefix = "ARTP" },
-            new ClassCategory { CategoryID = 7, CategoryName = "Astronomy", CategoryPrefix = "ASTR" },
-            new ClassCategory { CategoryID = 8, CategoryName = "Biology", CategoryPrefix = "BIOL" },
-            new ClassCategory { CategoryID = 9, CategoryName = "Business", CategoryPrefix = "BUSN" },
-            new ClassCategory { CategoryID = 10, CategoryName = "Chemistry", CategoryPrefix = "CHEM" },
-            new ClassCategory { CategoryID = 11, CategoryName = "Communications", CategoryPrefix = "COMM" },
-            new ClassCategory { CategoryID = 12, CategoryName = "Computer Info Tech", CategoryPrefix = "CITC" },
-            new ClassCategory { CategoryID = 13, CategoryName = "Computer Science", CategoryPrefix = "CISP" },
-            new ClassCategory { CategoryID = 14, CategoryName = "Criminal Justice", CategoryPrefix = "CRMJ" },
-            new ClassCategory { CategoryID = 15, CategoryName = "Culinary Arts", CategoryPrefix = "CULA" },
-            new ClassCategory { CategoryID = 16, CategoryName = "Digital Media", CategoryPrefix = "DIGM" },
-            new ClassCategory { CategoryID = 17, CategoryName = "Early Childhood Education", CategoryPrefix = "ECED" },
-            new ClassCategory { CategoryID = 18, CategoryName = "Economics", CategoryPrefix = "ECON" },
-            new ClassCategory { CategoryID = 19, CategoryName = "Education", CategoryPrefix = "EDUC" },
-            new ClassCategory { CategoryID = 20, CategoryName = "Electrical Engin Tech", CategoryPrefix = "EETC" },
-            new ClassCategory { CategoryID = 21, CategoryName = "Emergency Med Serv Para", CategoryPrefix = "EMSP" },
-            new ClassCategory { CategoryID = 22, CategoryName = "Emergency Med Service", CategoryPrefix = "EMSA" },
-            new ClassCategory { CategoryID = 23, CategoryName = "Emergency Med Service", CategoryPrefix = "EMSB" },
-            new ClassCategory { CategoryID = 24, CategoryName = "Engineering", CategoryPrefix = "ENGR" },
-            new ClassCategory { CategoryID = 25, CategoryName = "Engineering Systems Tech", CategoryPrefix = "ENST" },
-            new ClassCategory { CategoryID = 26, CategoryName = "Engineering Technology", CategoryPrefix = "EGRT" },
-            new ClassCategory { CategoryID = 27, CategoryName = "English", CategoryPrefix = "ENGL" },
-            new ClassCategory { CategoryID = 28, CategoryName = "Fire Science", CategoryPrefix = "FIRE" },
-            new ClassCategory { CategoryID = 29, CategoryName = "French", CategoryPrefix = "FREN" },
-            new ClassCategory { CategoryID = 30, CategoryName = "Geography", CategoryPrefix = "GEOG" },
-            new ClassCategory { CategoryID = 31, CategoryName = "Geology", CategoryPrefix = "GEOL" },
-            new ClassCategory { CategoryID = 32, CategoryName = "Health", CategoryPrefix = "HLTH" },
-            new ClassCategory { CategoryID = 33, CategoryName = "Health Information Management", CategoryPrefix = "HIMT" },
-            new ClassCategory { CategoryID = 34, CategoryName = "History", CategoryPrefix = "HIST" },
-            new ClassCategory { CategoryID = 35, CategoryName = "Hospitality Management", CategoryPrefix = "HGMT" },
-            new ClassCategory { CategoryID = 36, CategoryName = "Humanities", CategoryPrefix = "HUM" },
-            new ClassCategory { CategoryID = 37, CategoryName = "Information Systems", CategoryPrefix = "INFS" },
-            new ClassCategory { CategoryID = 38, CategoryName = "Mathematics", CategoryPrefix = "MATH" },
-            new ClassCategory { CategoryID = 39, CategoryName = "Music", CategoryPrefix = "MUS" },
-            new ClassCategory { CategoryID = 40, CategoryName = "Nursing", CategoryPrefix = "NRSG" },
-            new ClassCategory { CategoryID = 41, CategoryName = "Occupational Thrpy Asst", CategoryPrefix = "OTAP" },
-            new ClassCategory { CategoryID = 42, CategoryName = "Paralegal", CategoryPrefix = "LEGL" },
-            new ClassCategory { CategoryID = 43, CategoryName = "Pharmacy Technician", CategoryPrefix = "PHRX" },
-            new ClassCategory { CategoryID = 44, CategoryName = "Philosophy", CategoryPrefix = "PHIL" },
-            new ClassCategory { CategoryID = 45, CategoryName = "Physical Education", CategoryPrefix = "PHED" },
-            new ClassCategory { CategoryID = 46, CategoryName = "Physical Science", CategoryPrefix = "PSCI" },
-            new ClassCategory { CategoryID = 47, CategoryName = "Physical Therapist Asst", CategoryPrefix = "PTAT" },
-            new ClassCategory { CategoryID = 48, CategoryName = "Physics", CategoryPrefix = "PHYS" },
-            new ClassCategory { CategoryID = 49, CategoryName = "Political Science", CategoryPrefix = "POLS" },
-            new ClassCategory { CategoryID = 50, CategoryName = "Psychology", CategoryPrefix = "PSYC" },
-            new ClassCategory { CategoryID = 51, CategoryName = "Reading", CategoryPrefix = "READ" },
-            new ClassCategory { CategoryID = 52, CategoryName = "Religion", CategoryPrefix = "RELS" },
-            new ClassCategory { CategoryID = 53, CategoryName = "Respiratory Care", CategoryPrefix = "RESP" },
-            new ClassCategory { CategoryID = 54, CategoryName = "Social Work", CategoryPrefix = "SWRK" },
-            new ClassCategory { CategoryID = 55, CategoryName = "Sociology", CategoryPrefix = "SOCI" },
-            new ClassCategory { CategoryID = 56, CategoryName = "Spanish", CategoryPrefix = "SPAN" },
-            new ClassCategory { CategoryID = 57, CategoryName = "Special Education", CategoryPrefix = "SPED" },
-            new ClassCategory { CategoryID = 58, CategoryName = "Surgical Technology", CategoryPrefix = "SURG" },
-            new ClassCategory { CategoryID = 59, CategoryName = "Theatre", CategoryPrefix = "THEA" },
-            new ClassCategory { CategoryID = 60, CategoryName = "Women/Gender Studies", CategoryPrefix = "WGST" }
+        modelBuilder.Entity<ClassCategories>().HasData(
+            new ClassCategories { CategoryID = 1, CategoryName = "Accounting", CategoryPrefix = "ACCT" },
+            new ClassCategories { CategoryID = 2, CategoryName = "Agriculture", CategoryPrefix = "AGRI" },
+            new ClassCategories { CategoryID = 3, CategoryName = "Agriculture", CategoryPrefix = "AGRM" },
+            new ClassCategories { CategoryID = 4, CategoryName = "Anthropology", CategoryPrefix = "ANTH" },
+            new ClassCategories { CategoryID = 5, CategoryName = "Art", CategoryPrefix = "ART" },
+            new ClassCategories { CategoryID = 6, CategoryName = "Art Performance", CategoryPrefix = "ARTP" },
+            new ClassCategories { CategoryID = 7, CategoryName = "Astronomy", CategoryPrefix = "ASTR" },
+            new ClassCategories { CategoryID = 8, CategoryName = "Biology", CategoryPrefix = "BIOL" },
+            new ClassCategories { CategoryID = 9, CategoryName = "Business", CategoryPrefix = "BUSN" },
+            new ClassCategories { CategoryID = 10, CategoryName = "Chemistry", CategoryPrefix = "CHEM" },
+            new ClassCategories { CategoryID = 11, CategoryName = "Communications", CategoryPrefix = "COMM" },
+            new ClassCategories { CategoryID = 12, CategoryName = "Computer Info Tech", CategoryPrefix = "CITC" },
+            new ClassCategories { CategoryID = 13, CategoryName = "Computer Science", CategoryPrefix = "CISP" },
+            new ClassCategories { CategoryID = 14, CategoryName = "Criminal Justice", CategoryPrefix = "CRMJ" },
+            new ClassCategories { CategoryID = 15, CategoryName = "Culinary Arts", CategoryPrefix = "CULA" },
+            new ClassCategories { CategoryID = 16, CategoryName = "Digital Media", CategoryPrefix = "DIGM" },
+            new ClassCategories { CategoryID = 17, CategoryName = "Early Childhood Education", CategoryPrefix = "ECED" },
+            new ClassCategories { CategoryID = 18, CategoryName = "Economics", CategoryPrefix = "ECON" },
+            new ClassCategories { CategoryID = 19, CategoryName = "Education", CategoryPrefix = "EDUC" },
+            new ClassCategories { CategoryID = 20, CategoryName = "Electrical Engin Tech", CategoryPrefix = "EETC" },
+            new ClassCategories { CategoryID = 21, CategoryName = "Emergency Med Serv Para", CategoryPrefix = "EMSP" },
+            new ClassCategories { CategoryID = 22, CategoryName = "Emergency Med Service", CategoryPrefix = "EMSA" },
+            new ClassCategories { CategoryID = 23, CategoryName = "Emergency Med Service", CategoryPrefix = "EMSB" },
+            new ClassCategories { CategoryID = 24, CategoryName = "Engineering", CategoryPrefix = "ENGR" },
+            new ClassCategories { CategoryID = 25, CategoryName = "Engineering Systems Tech", CategoryPrefix = "ENST" },
+            new ClassCategories { CategoryID = 26, CategoryName = "Engineering Technology", CategoryPrefix = "EGRT" },
+            new ClassCategories { CategoryID = 27, CategoryName = "English", CategoryPrefix = "ENGL" },
+            new ClassCategories { CategoryID = 28, CategoryName = "Fire Science", CategoryPrefix = "FIRE" },
+            new ClassCategories { CategoryID = 29, CategoryName = "French", CategoryPrefix = "FREN" },
+            new ClassCategories { CategoryID = 30, CategoryName = "Geography", CategoryPrefix = "GEOG" },
+            new ClassCategories { CategoryID = 31, CategoryName = "Geology", CategoryPrefix = "GEOL" },
+            new ClassCategories { CategoryID = 32, CategoryName = "Health", CategoryPrefix = "HLTH" },
+            new ClassCategories { CategoryID = 33, CategoryName = "Health Information Management", CategoryPrefix = "HIMT" },
+            new ClassCategories { CategoryID = 34, CategoryName = "History", CategoryPrefix = "HIST" },
+            new ClassCategories { CategoryID = 35, CategoryName = "Hospitality Management", CategoryPrefix = "HGMT" },
+            new ClassCategories { CategoryID = 36, CategoryName = "Humanities", CategoryPrefix = "HUM" },
+            new ClassCategories { CategoryID = 37, CategoryName = "Information Systems", CategoryPrefix = "INFS" },
+            new ClassCategories { CategoryID = 38, CategoryName = "Mathematics", CategoryPrefix = "MATH" },
+            new ClassCategories { CategoryID = 39, CategoryName = "Music", CategoryPrefix = "MUS" },
+            new ClassCategories { CategoryID = 40, CategoryName = "Nursing", CategoryPrefix = "NRSG" },
+            new ClassCategories { CategoryID = 41, CategoryName = "Occupational Thrpy Asst", CategoryPrefix = "OTAP" },
+            new ClassCategories { CategoryID = 42, CategoryName = "Paralegal", CategoryPrefix = "LEGL" },
+            new ClassCategories { CategoryID = 43, CategoryName = "Pharmacy Technician", CategoryPrefix = "PHRX" },
+            new ClassCategories { CategoryID = 44, CategoryName = "Philosophy", CategoryPrefix = "PHIL" },
+            new ClassCategories { CategoryID = 45, CategoryName = "Physical Education", CategoryPrefix = "PHED" },
+            new ClassCategories { CategoryID = 46, CategoryName = "Physical Science", CategoryPrefix = "PSCI" },
+            new ClassCategories { CategoryID = 47, CategoryName = "Physical Therapist Asst", CategoryPrefix = "PTAT" },
+            new ClassCategories { CategoryID = 48, CategoryName = "Physics", CategoryPrefix = "PHYS" },
+            new ClassCategories { CategoryID = 49, CategoryName = "Political Science", CategoryPrefix = "POLS" },
+            new ClassCategories { CategoryID = 50, CategoryName = "Psychology", CategoryPrefix = "PSYC" },
+            new ClassCategories { CategoryID = 51, CategoryName = "Reading", CategoryPrefix = "READ" },
+            new ClassCategories { CategoryID = 52, CategoryName = "Religion", CategoryPrefix = "RELS" },
+            new ClassCategories { CategoryID = 53, CategoryName = "Respiratory Care", CategoryPrefix = "RESP" },
+            new ClassCategories { CategoryID = 54, CategoryName = "Social Work", CategoryPrefix = "SWRK" },
+            new ClassCategories { CategoryID = 55, CategoryName = "Sociology", CategoryPrefix = "SOCI" },
+            new ClassCategories { CategoryID = 56, CategoryName = "Spanish", CategoryPrefix = "SPAN" },
+            new ClassCategories { CategoryID = 57, CategoryName = "Special Education", CategoryPrefix = "SPED" },
+            new ClassCategories { CategoryID = 58, CategoryName = "Surgical Technology", CategoryPrefix = "SURG" },
+            new ClassCategories { CategoryID = 59, CategoryName = "Theatre", CategoryPrefix = "THEA" },
+            new ClassCategories { CategoryID = 60, CategoryName = "Women/Gender Studies", CategoryPrefix = "WGST" }
+
         );
 
         // Seed data for Classes
@@ -141,18 +141,19 @@ public class NursingStudentContext : DbContext
 
         // Seed data for StudentTests
         modelBuilder.Entity<StudentTest>().HasData(
-            new StudentTest { Test_ID = 1, attemptNumber = 1, StudentID = 00001001, Score = 22 },
-            new StudentTest { Test_ID = 2, attemptNumber = 1, StudentID = 00001001, Score = 74},
-            new StudentTest { Test_ID = 2, attemptNumber = 2, StudentID = 00001001, Score = 94 },
-            new StudentTest { Test_ID = 2, attemptNumber = 1, StudentID = 00001002, Score = 92 }
+
+            new StudentTest { TestID = 1, AttemptNumber = 1, StudentID = 00001001, Score = 22 },
+            new StudentTest { TestID = 2, AttemptNumber = 1, StudentID = 00001001, Score = 74},
+            new StudentTest { TestID = 2, AttemptNumber = 2, StudentID = 00001001, Score = 94 },
+            new StudentTest { TestID = 2, AttemptNumber = 1, StudentID = 00001002, Score = 92 }
         );
 
         // Seed data for StudentClasses
         modelBuilder.Entity<StudentClass>().HasData(
-            new StudentClass { ClassID = 2010, StudentID = 00001001, CategoryID = 8, LetterGrade = "B" },
-            new StudentClass { ClassID = 1010, StudentID = 00001002, CategoryID = 1, LetterGrade = "A" },
-            new StudentClass { ClassID = 2010, StudentID = 00001002, CategoryID = 8, LetterGrade = "C" },
-            new StudentClass { ClassID = 1010, StudentID = 00001001, CategoryID = 1, LetterGrade = "A" }
+            new StudentClass { ClassID = 2010, CategoryID = 8,  StudentID = 00001001, LetterGrade = "B" },
+            new StudentClass { ClassID = 1010, CategoryID = 1, StudentID = 00001002, LetterGrade = "A" },
+            new StudentClass { ClassID = 2010, CategoryID = 8, StudentID = 00001002, LetterGrade = "C" },
+            new StudentClass { ClassID = 1010, CategoryID = 1, StudentID = 00001001, LetterGrade = "A" }
         );
     }
 }

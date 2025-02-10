@@ -1,18 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Nursing_Student_Vetting.Models
 {
     public class StudentClass
     {
-        // primary key
+        [Key, Column(Order = 0)]
         public int ClassID { get; set; }
 
-        public int StudentID { get; set; } // foreign key
+        [Key, Column(Order = 1)]
+        public int CategoryID { get; set; }
+
+        [Key, Column(Order = 2)]
+        public int StudentID { get; set; }
+
+        public Class Class { get; set; }
+
+        public Student Student { get; set; }
 
         [Required(ErrorMessage = "Please enter a letter grade")]
         
         // Not sure if this is auto implemented of not??
-        public char LetterGrade { get; set; }
+        public string LetterGrade { get; set; }
 
     }
 }
