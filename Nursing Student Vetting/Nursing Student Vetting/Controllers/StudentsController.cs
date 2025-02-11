@@ -44,11 +44,14 @@ namespace Nursing_Student_Vetting.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Student student) 
+        public async Task<IActionResult> Update(Student student) 
         {
+
             if (ModelState.IsValid)
             {
-                if (student.StudentID == 0)        // if student is new
+                bool exists = await _context.Students.AnyAsync(p => p.StudentID == student.StudentID);
+
+                if (!exists)        // if student is new
                 {
                     _context.Students.Add(student);
                 }
