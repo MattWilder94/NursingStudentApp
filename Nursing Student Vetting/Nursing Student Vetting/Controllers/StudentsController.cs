@@ -8,37 +8,37 @@ namespace Nursing_Student_Vetting.Controllers
     {
         private readonly NursingStudentContext _context;
         private List<Student> students;
-
         public StudentsController(NursingStudentContext context)
         {
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToAction(nameof(List));
+        }
+
+
         public IActionResult List()
         {
-            var students = _context.Students.ToList();
+            List<Student> students = _context.Students.ToList();
             return View(students);
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            Student student = new Student();
-
-            ViewBag.Student = student;
-
-            return View(student);
-        }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(int? id)
         {
-            Student student = _context.Students  // returning student name and ID
-                .Include(s => s.FirstName)
-                .Include(s => s.LastName)
-                .FirstOrDefault(s => s.StudentID == id) ?? new Student();
+            if (id == null)
+            {
+                return View(new Student()); // New student
+            }
 
-            ViewBag.Student = student;
+            Student? student = _context.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
 
             return View(student);
         }
