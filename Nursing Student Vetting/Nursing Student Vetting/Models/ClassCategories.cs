@@ -2,7 +2,7 @@
 
 namespace Nursing_Student_Vetting.Models
 {
-    public class ClassCategory
+    public class ClassCategories
     {
         [Key]
         public int CategoryID { get; set; }
