@@ -28,20 +28,14 @@ namespace Nursing_Student_Vetting.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            Student student = new Student();
-
-            ViewBag.Student = student;
-
-            return View(student);
+            return View(new Student());
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(int? id)
         {
-            Student student = _context.Students  // returning student name and ID
-                .Include(s => s.FirstName)
-                .Include(s => s.LastName)
-                .FirstOrDefault(s => s.StudentID == id) ?? new Student();
+            Student? student = _context.Students.Find();  // returning student name and ID
+         
 
             ViewBag.Student = student;
 
