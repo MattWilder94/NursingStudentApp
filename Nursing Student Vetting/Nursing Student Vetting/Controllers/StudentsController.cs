@@ -8,7 +8,6 @@ namespace Nursing_Student_Vetting.Controllers
     {
         private readonly NursingStudentContext _context;
         private List<Student> students;
-
         public StudentsController(NursingStudentContext context)
         {
             _context = context;
@@ -19,25 +18,27 @@ namespace Nursing_Student_Vetting.Controllers
             return RedirectToAction(nameof(List));
         }
 
+
         public IActionResult List()
         {
-            var students = _context.Students.ToList();
+            List<Student> students = _context.Students.ToList();
             return View(students);
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            return View(new Student());
-        }
 
         [HttpGet]
         public IActionResult Update(int? id)
         {
-            Student? student = _context.Students.Find();  // returning student name and ID
-         
+            if (id == null)
+            {
+                return View(new Student()); // New student
+            }
 
-            ViewBag.Student = student;
+            Student? student = _context.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
 
             return View(student);
         }
