@@ -14,6 +14,11 @@ namespace Nursing_Student_Vetting.Controllers
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToAction(nameof(List));
+        }
+
         public IActionResult List()
         {
             var students = _context.Students.ToList();
