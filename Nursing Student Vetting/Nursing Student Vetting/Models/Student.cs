@@ -6,7 +6,7 @@ namespace Nursing_Student_Vetting.Models
     public class Student
     {
         // Primary key
-        public int StudentId { get; set; }
+        public int StudentID { get; set; }
 
         [Required(ErrorMessage = "Please enter a first name")]
         public String FirstName { get; set; } = String.Empty;
