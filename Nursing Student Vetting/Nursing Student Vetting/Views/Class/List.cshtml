@@ -7,7 +7,7 @@ ViewData["Title"] = "Class List";
 <h1>Class List</h1>
 
 <p>
-    <a asp-action="Update">Create New Student</a>
+    <a asp-action="Update">Create New Class</a>
 </p>
 
 <table class="table">
@@ -29,25 +29,25 @@ ViewData["Title"] = "Class List";
     </tr>
     </thead>
     <tbody>
-    @foreach (var @class in Model)
+    @foreach (var classItem in Model)
     {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => class.ClassID)
+            @Html.DisplayFor(modelItem => classItem.ClassID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => class.ClassName)
+            @Html.DisplayFor(modelItem => classItem.ClassName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => class.CreditHours)
+            @Html.DisplayFor(modelItem => classItem.CreditHours)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => class.IsRequired)
+            @Html.DisplayFor(modelItem => classItem.IsRequired)
         </td>
         <td>
-            <a asp-action="Update" asp-route-id="@class.ClassID">Edit</a> |
-            <a asp-action="Details" asp-route-id="@class.ClassID">Details</a> |
-            <a asp-action="Delete" asp-route-id="@class.ClassID">Delete</a>
+            <a asp-action="Update" asp-route-id="@classItem.ClassID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@classItem.ClassID">Details</a> |
+            <a asp-action="Delete" asp-route-id="@classItem.ClassID">Delete</a>
         </td>
     </tr>
     }

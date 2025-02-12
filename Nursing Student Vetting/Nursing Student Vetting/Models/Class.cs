@@ -9,7 +9,7 @@ namespace Nursing_Student_Vetting.Models
         public int ClassID { get; set; } // primary key
         [Key, Column(Order = 1)]
         public int CategoryID { get; set; } // foreign key
-        public ClassCategories Category { get; set; }
+        public ClassCategories? Category { get; set; }
 
         [Required(ErrorMessage = "Please enter a class name")]
         public string ClassName { get; set; } = String.Empty;
@@ -22,6 +22,6 @@ namespace Nursing_Student_Vetting.Models
 
         public bool IsRequired { get; set; }
 
-        public ICollection<StudentClass> StudentClasses { get; set; }
+        public ICollection<StudentClass>? StudentClasses { get; set; }
     }
 }
