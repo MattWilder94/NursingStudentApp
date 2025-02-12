@@ -7,7 +7,7 @@
 <h1>Student List</h1>
 
 <p>
-    <a asp-action="List">Create New Student</a>
+    <a asp-action="Update">Create New Student</a>
 </p>
 
 <table class="table">
@@ -51,7 +51,7 @@
                     @Html.DisplayFor(modelItem => student.EvaluationScore)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@student.StudentID">Edit</a> |
+                    <a asp-action="Update" asp-route-id="@student.StudentID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@student.StudentID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@student.StudentID">Delete</a>
                 </td>
