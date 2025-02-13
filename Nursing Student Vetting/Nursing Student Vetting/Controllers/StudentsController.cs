@@ -18,13 +18,49 @@ namespace Nursing_Student_Vetting.Controllers
             return RedirectToAction(nameof(List));
         }
 
-
-        public IActionResult List()
+        // GET: Home/Index
+        public async Task<IActionResult> List(string sortOrder, string searchString)
         {
-            List<Student> students = _context.Students.ToList();
-            return View(students);
-        }
+            ViewData["CurrentSort"] = sortOrder;        //Set in the Switch statement Default is LastName > FirstName 
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["IdSortParm"] = sortOrder == "Id" ? "id_desc" : "Id";
+            ViewData["CurrentFilter"] = searchString;
 
+            var student = from i in _context.Students
+                        select i;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int id;
+                if (int.TryParse(searchString, out id))
+                {
+                    student = student.Where(s => s.StudentID == id);
+                }
+                else
+                {
+                    student = student.Where(s => s.LastName.Contains(searchString) || 
+                    s.FirstName.Contains(searchString));
+                }
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    student = student.OrderByDescending(i => i.LastName).ThenBy(i => i.FirstName);
+                    break;
+                case "Id":
+                    student = student.OrderBy(i => i.StudentID);
+                    break;
+                case "id_desc":
+                    student = student.OrderByDescending(i => i.StudentID);
+                    break;
+                default:
+                    student = student.OrderBy(i => i.LastName).ThenBy(i => i.FirstName);
+                    break;
+            }
+
+            return View(await student.AsNoTracking().ToListAsync());
+        }
 
         [HttpGet]
         public IActionResult Update(int? id)
