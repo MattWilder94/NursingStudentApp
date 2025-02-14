@@ -82,7 +82,7 @@ namespace Nursing_Student_Vetting.Controllers
             {
                 _context.Students.Remove(student);
                 _context.SaveChanges();
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(List));
             }
         }
         
