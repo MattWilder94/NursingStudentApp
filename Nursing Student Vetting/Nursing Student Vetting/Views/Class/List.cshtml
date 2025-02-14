@@ -47,7 +47,9 @@ ViewData["Title"] = "Class List";
         <td>
             <a asp-action="Update" asp-route-id="@classItem.ClassID">Edit</a> |
             <a asp-action="Details" asp-route-id="@classItem.ClassID">Details</a> |
-            <a asp-action="Delete" asp-route-id="@classItem.ClassID">Delete</a>
+                    <form asp-action="Delete" asp-route-id="@classItem.ClassID" method="post" onsubmit="return confirm('Are you sure you want to delete @classItem.ClassName?');">
+                        <button type="submit" class="btn btn-link text-danger">Delete</button>
+                    </form>
         </td>
     </tr>
     }
