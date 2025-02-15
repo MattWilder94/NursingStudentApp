@@ -3,25 +3,34 @@
 @{
 
     ViewData["Title"] = "Student List";
+    var sortOrder = ViewData["CurrentSort"] as string;
+    var nameSortParam = sortOrder == "Name" ? "name_desc" : "Name";
+    var idSortParam = sortOrder == "Id" ? "id_desc" : "Id";
 }
 
 <h1>Student List</h1>
 
 <p>
-    <a asp-action="Update">Create New Student</a>
+    <a asp-action="Update" class="btn btn-primary">Create New Student</a>
 </p>
+
+
+<form method="get" asp-action="List">
+    <div class="form-group">
+        <input type="text" name="searchString" class="form-control" 
+            placeholder="Search Students..." value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </div>
+</form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StudentID)
+                <a asp-action="List" asp-route-sortOrder="@idSortParam">Student ID</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                <a asp-action="List" asp-route-sortOrder="@nameSortParam">Name</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -40,10 +49,7 @@
                     @Html.DisplayFor(modelItem => student.StudentID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => student.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => student.LastName)
+                    @Html.DisplayFor(modelItem => student.LastName), @Html.DisplayFor(modelItem => student.FirstName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => student.Email)
@@ -57,6 +63,7 @@
                     <form asp-action="Delete" asp-route-id="@student.StudentID" method="post" onsubmit="return confirm('Are you sure you want to delete @student.FirstName @student.LastName?');">
                         <button type="submit" class="btn btn-link text-danger">Delete</button>
                     </form>
+
                 </td>
             </tr>
         }
