@@ -79,9 +79,9 @@ namespace Nursing_Student_Vetting.Controllers
                 {
                     return NotFound();
                 }
-                int categoryid = classItem.CategoryID;
+                String categoryPrefix = classItem.CategoryPrefix;
 
-                var studentClasses = _context.StudentClasses.Where(sc => sc.ClassID == id && sc.CategoryID == categoryid);
+                var studentClasses = _context.StudentClasses.Where(sc => sc.ClassID == id && sc.CategoryPrefix == categoryPrefix);
                 _context.StudentClasses.RemoveRange(studentClasses);
 
                 _context.Classes.Remove(classItem);

@@ -8,7 +8,7 @@ namespace Nursing_Student_Vetting.Models
         [Key, Column(Order = 0 )]
         public int ClassID { get; set; } // primary key
         [Key, Column(Order = 1)]
-        public int CategoryID { get; set; } // foreign key
+        public string CategoryPrefix { get; set; } // foreign key
         public ClassCategories? Category { get; set; }
 
         [Required(ErrorMessage = "Please enter a class name")]

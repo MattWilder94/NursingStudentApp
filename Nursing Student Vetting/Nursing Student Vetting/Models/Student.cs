@@ -8,7 +8,7 @@ namespace Nursing_Student_Vetting.Models
     {
 
         [Key]
-        public int StudentID { get; set; }
+        public string StudentID { get; set; }
         public int EvaluationScore { get; set; }
 
 
