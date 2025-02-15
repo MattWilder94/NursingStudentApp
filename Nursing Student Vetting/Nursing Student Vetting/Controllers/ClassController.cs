@@ -71,19 +71,28 @@ namespace Nursing_Student_Vetting.Controllers
         [HttpPost] // basic delete action
         public IActionResult Delete(int id)
         {
-            var classItem = _context.Classes.FirstOrDefault(p => p.ClassID == id);
-            if (classItem == null)
+            try
             {
-                return NotFound();
+
+                var classItem = _context.Classes.FirstOrDefault(p => p.ClassID == id);
+                if (classItem == null)
+                {
+                    return NotFound();
+                }
+                String categoryPrefix = classItem.CategoryPrefix;
+
+                var studentClasses = _context.StudentClasses.Where(sc => sc.ClassID == id && sc.CategoryPrefix == categoryPrefix);
+                _context.StudentClasses.RemoveRange(studentClasses);
+
+                _context.Classes.Remove(classItem);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(List));
             }
-                
-            var studentClasses = _context.StudentClasses.Where(sc => sc.ClassID == id);
-            _context.StudentClasses.RemoveRange(studentClasses);
-
-            _context.Classes.Remove(classItem);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(List));
+            catch (Exception ex)
+            {
+                return Content($"Error: {ex.Message} - {ex.StackTrace}");
+            }
             
         }
     }

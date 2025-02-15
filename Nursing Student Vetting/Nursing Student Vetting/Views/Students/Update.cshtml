@@ -1,7 +1,7 @@
 ﻿@model Nursing_Student_Vetting.Models.Student
 
 @{
-    ViewData["Title"] = Model.StudentID == 0 ? "Add Student" : "Edit Student";
+    ViewData["Title"] = Model.StudentID == "" ? "Add Student" : "Edit Student";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -54,7 +54,7 @@
         <span asp-validation-for="EvaluationScore" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="@(Model.StudentID == 0 ? "Add Student" : "Update Student")" class="btn btn-primary" />
+        <input type="submit" value="@(Model.StudentID == "" ? "Add Student" : "Update Student")" class="btn btn-primary" />
     </div>
 </form>
 

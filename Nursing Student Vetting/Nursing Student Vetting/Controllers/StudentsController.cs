@@ -31,16 +31,8 @@ namespace Nursing_Student_Vetting.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                int id;
-                if (int.TryParse(searchString, out id))
-                {
-                    student = student.Where(s => s.StudentID == id);
-                }
-                else
-                {
                     student = student.Where(s => s.LastName.Contains(searchString) || 
-                    s.FirstName.Contains(searchString));
-                }
+                    s.FirstName.Contains(searchString) || s.StudentID.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -63,7 +55,7 @@ namespace Nursing_Student_Vetting.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(int? id)
+        public IActionResult Update(string? id)
         {
             if (id == null)
             {
@@ -105,5 +97,22 @@ namespace Nursing_Student_Vetting.Controllers
                 return View("List"); // "List" will probably be changed to addstudent.html
             }
         }
+
+        [HttpPost] // basic delete action
+        public IActionResult Delete(string id)
+        {
+            var student = _context.Students.FirstOrDefault(p => p.StudentID == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _context.Students.Remove(student);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(List));
+            }
+        }
+        
     }
 }

@@ -9,10 +9,10 @@ namespace Nursing_Student_Vetting.Models
         public int ClassID { get; set; }
 
         [Key, Column(Order = 1)]
-        public int CategoryID { get; set; }
+        public string CategoryPrefix { get; set; }
 
         [Key, Column(Order = 2)]
-        public int StudentID { get; set; }
+        public string StudentID { get; set; }
 
         public Class Class { get; set; }
 

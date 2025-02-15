@@ -27,8 +27,8 @@ namespace Nursing_Student_Vetting.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int")
+                    b.Property<string>("CategoryPrefix")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnOrder(1);
 
                     b.Property<string>("ClassName")
@@ -41,9 +41,9 @@ namespace Nursing_Student_Vetting.Migrations
                     b.Property<bool>("IsRequired")
                         .HasColumnType("bit");
 
-                    b.HasKey("ClassID", "CategoryID");
+                    b.HasKey("ClassID", "CategoryPrefix");
 
-                    b.HasIndex("CategoryID");
+                    b.HasIndex("CategoryPrefix");
 
                     b.ToTable("Classes");
 
@@ -51,7 +51,7 @@ namespace Nursing_Student_Vetting.Migrations
                         new
                         {
                             ClassID = 2010,
-                            CategoryID = 8,
+                            CategoryPrefix = "BIOL",
                             ClassName = "Human Anatomy and Physiology I",
                             CreditHours = 3,
                             IsRequired = true
@@ -59,7 +59,7 @@ namespace Nursing_Student_Vetting.Migrations
                         new
                         {
                             ClassID = 1010,
-                            CategoryID = 1,
+                            CategoryPrefix = "ACCT",
                             ClassName = "Principles of Accounting I",
                             CreditHours = 3,
                             IsRequired = false
@@ -68,391 +68,324 @@ namespace Nursing_Student_Vetting.Migrations
 
             modelBuilder.Entity("Nursing_Student_Vetting.Models.ClassCategories", b =>
                 {
-                    b.Property<int>("CategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
+                    b.Property<string>("CategoryPrefix")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CategoryPrefix")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryID");
+                    b.HasKey("CategoryPrefix");
 
                     b.ToTable("ClassCategories");
 
                     b.HasData(
                         new
                         {
-                            CategoryID = 1,
-                            CategoryName = "Accounting",
-                            CategoryPrefix = "ACCT"
+                            CategoryPrefix = "ACCT",
+                            CategoryName = "Accounting"
                         },
                         new
                         {
-                            CategoryID = 2,
-                            CategoryName = "Agriculture",
-                            CategoryPrefix = "AGRI"
+                            CategoryPrefix = "AGRI",
+                            CategoryName = "Agriculture"
                         },
                         new
                         {
-                            CategoryID = 3,
-                            CategoryName = "Agriculture",
-                            CategoryPrefix = "AGRM"
+                            CategoryPrefix = "AGRM",
+                            CategoryName = "Agriculture"
                         },
                         new
                         {
-                            CategoryID = 4,
-                            CategoryName = "Anthropology",
-                            CategoryPrefix = "ANTH"
+                            CategoryPrefix = "ANTH",
+                            CategoryName = "Anthropology"
                         },
                         new
                         {
-                            CategoryID = 5,
-                            CategoryName = "Art",
-                            CategoryPrefix = "ART"
+                            CategoryPrefix = "ART",
+                            CategoryName = "Art"
                         },
                         new
                         {
-                            CategoryID = 6,
-                            CategoryName = "Art Performance",
-                            CategoryPrefix = "ARTP"
+                            CategoryPrefix = "ARTP",
+                            CategoryName = "Art Performance"
                         },
                         new
                         {
-                            CategoryID = 7,
-                            CategoryName = "Astronomy",
-                            CategoryPrefix = "ASTR"
+                            CategoryPrefix = "ASTR",
+                            CategoryName = "Astronomy"
                         },
                         new
                         {
-                            CategoryID = 8,
-                            CategoryName = "Biology",
-                            CategoryPrefix = "BIOL"
+                            CategoryPrefix = "BIOL",
+                            CategoryName = "Biology"
                         },
                         new
                         {
-                            CategoryID = 9,
-                            CategoryName = "Business",
-                            CategoryPrefix = "BUSN"
+                            CategoryPrefix = "BUSN",
+                            CategoryName = "Business"
                         },
                         new
                         {
-                            CategoryID = 10,
-                            CategoryName = "Chemistry",
-                            CategoryPrefix = "CHEM"
+                            CategoryPrefix = "CHEM",
+                            CategoryName = "Chemistry"
                         },
                         new
                         {
-                            CategoryID = 11,
-                            CategoryName = "Communications",
-                            CategoryPrefix = "COMM"
+                            CategoryPrefix = "COMM",
+                            CategoryName = "Communications"
                         },
                         new
                         {
-                            CategoryID = 12,
-                            CategoryName = "Computer Info Tech",
-                            CategoryPrefix = "CITC"
+                            CategoryPrefix = "CITC",
+                            CategoryName = "Computer Info Tech"
                         },
                         new
                         {
-                            CategoryID = 13,
-                            CategoryName = "Computer Science",
-                            CategoryPrefix = "CISP"
+                            CategoryPrefix = "CISP",
+                            CategoryName = "Computer Science"
                         },
                         new
                         {
-                            CategoryID = 14,
-                            CategoryName = "Criminal Justice",
-                            CategoryPrefix = "CRMJ"
+                            CategoryPrefix = "CRMJ",
+                            CategoryName = "Criminal Justice"
                         },
                         new
                         {
-                            CategoryID = 15,
-                            CategoryName = "Culinary Arts",
-                            CategoryPrefix = "CULA"
+                            CategoryPrefix = "CULA",
+                            CategoryName = "Culinary Arts"
                         },
                         new
                         {
-                            CategoryID = 16,
-                            CategoryName = "Digital Media",
-                            CategoryPrefix = "DIGM"
+                            CategoryPrefix = "DIGM",
+                            CategoryName = "Digital Media"
                         },
                         new
                         {
-                            CategoryID = 17,
-                            CategoryName = "Early Childhood Education",
-                            CategoryPrefix = "ECED"
+                            CategoryPrefix = "ECED",
+                            CategoryName = "Early Childhood Education"
                         },
                         new
                         {
-                            CategoryID = 18,
-                            CategoryName = "Economics",
-                            CategoryPrefix = "ECON"
+                            CategoryPrefix = "ECON",
+                            CategoryName = "Economics"
                         },
                         new
                         {
-                            CategoryID = 19,
-                            CategoryName = "Education",
-                            CategoryPrefix = "EDUC"
+                            CategoryPrefix = "EDUC",
+                            CategoryName = "Education"
                         },
                         new
                         {
-                            CategoryID = 20,
-                            CategoryName = "Electrical Engin Tech",
-                            CategoryPrefix = "EETC"
+                            CategoryPrefix = "EETC",
+                            CategoryName = "Electrical Engin Tech"
                         },
                         new
                         {
-                            CategoryID = 21,
-                            CategoryName = "Emergency Med Serv Para",
-                            CategoryPrefix = "EMSP"
+                            CategoryPrefix = "EMSP",
+                            CategoryName = "Emergency Med Serv Para"
                         },
                         new
                         {
-                            CategoryID = 22,
-                            CategoryName = "Emergency Med Service",
-                            CategoryPrefix = "EMSA"
+                            CategoryPrefix = "EMSA",
+                            CategoryName = "Emergency Med Service"
                         },
                         new
                         {
-                            CategoryID = 23,
-                            CategoryName = "Emergency Med Service",
-                            CategoryPrefix = "EMSB"
+                            CategoryPrefix = "EMSB",
+                            CategoryName = "Emergency Med Service"
                         },
                         new
                         {
-                            CategoryID = 24,
-                            CategoryName = "Engineering",
-                            CategoryPrefix = "ENGR"
+                            CategoryPrefix = "ENGR",
+                            CategoryName = "Engineering"
                         },
                         new
                         {
-                            CategoryID = 25,
-                            CategoryName = "Engineering Systems Tech",
-                            CategoryPrefix = "ENST"
+                            CategoryPrefix = "ENST",
+                            CategoryName = "Engineering Systems Tech"
                         },
                         new
                         {
-                            CategoryID = 26,
-                            CategoryName = "Engineering Technology",
-                            CategoryPrefix = "EGRT"
+                            CategoryPrefix = "EGRT",
+                            CategoryName = "Engineering Technology"
                         },
                         new
                         {
-                            CategoryID = 27,
-                            CategoryName = "English",
-                            CategoryPrefix = "ENGL"
+                            CategoryPrefix = "ENGL",
+                            CategoryName = "English"
                         },
                         new
                         {
-                            CategoryID = 28,
-                            CategoryName = "Fire Science",
-                            CategoryPrefix = "FIRE"
+                            CategoryPrefix = "FIRE",
+                            CategoryName = "Fire Science"
                         },
                         new
                         {
-                            CategoryID = 29,
-                            CategoryName = "French",
-                            CategoryPrefix = "FREN"
+                            CategoryPrefix = "FREN",
+                            CategoryName = "French"
                         },
                         new
                         {
-                            CategoryID = 30,
-                            CategoryName = "Geography",
-                            CategoryPrefix = "GEOG"
+                            CategoryPrefix = "GEOG",
+                            CategoryName = "Geography"
                         },
                         new
                         {
-                            CategoryID = 31,
-                            CategoryName = "Geology",
-                            CategoryPrefix = "GEOL"
+                            CategoryPrefix = "GEOL",
+                            CategoryName = "Geology"
                         },
                         new
                         {
-                            CategoryID = 32,
-                            CategoryName = "Health",
-                            CategoryPrefix = "HLTH"
+                            CategoryPrefix = "HLTH",
+                            CategoryName = "Health"
                         },
                         new
                         {
-                            CategoryID = 33,
-                            CategoryName = "Health Information Management",
-                            CategoryPrefix = "HIMT"
+                            CategoryPrefix = "HIMT",
+                            CategoryName = "Health Information Management"
                         },
                         new
                         {
-                            CategoryID = 34,
-                            CategoryName = "History",
-                            CategoryPrefix = "HIST"
+                            CategoryPrefix = "HIST",
+                            CategoryName = "History"
                         },
                         new
                         {
-                            CategoryID = 35,
-                            CategoryName = "Hospitality Management",
-                            CategoryPrefix = "HGMT"
+                            CategoryPrefix = "HGMT",
+                            CategoryName = "Hospitality Management"
                         },
                         new
                         {
-                            CategoryID = 36,
-                            CategoryName = "Humanities",
-                            CategoryPrefix = "HUM"
+                            CategoryPrefix = "HUM",
+                            CategoryName = "Humanities"
                         },
                         new
                         {
-                            CategoryID = 37,
-                            CategoryName = "Information Systems",
-                            CategoryPrefix = "INFS"
+                            CategoryPrefix = "INFS",
+                            CategoryName = "Information Systems"
                         },
                         new
                         {
-                            CategoryID = 38,
-                            CategoryName = "Mathematics",
-                            CategoryPrefix = "MATH"
+                            CategoryPrefix = "MATH",
+                            CategoryName = "Mathematics"
                         },
                         new
                         {
-                            CategoryID = 39,
-                            CategoryName = "Music",
-                            CategoryPrefix = "MUS"
+                            CategoryPrefix = "MUS",
+                            CategoryName = "Music"
                         },
                         new
                         {
-                            CategoryID = 40,
-                            CategoryName = "Nursing",
-                            CategoryPrefix = "NRSG"
+                            CategoryPrefix = "NRSG",
+                            CategoryName = "Nursing"
                         },
                         new
                         {
-                            CategoryID = 41,
-                            CategoryName = "Occupational Thrpy Asst",
-                            CategoryPrefix = "OTAP"
+                            CategoryPrefix = "OTAP",
+                            CategoryName = "Occupational Thrpy Asst"
                         },
                         new
                         {
-                            CategoryID = 42,
-                            CategoryName = "Paralegal",
-                            CategoryPrefix = "LEGL"
+                            CategoryPrefix = "LEGL",
+                            CategoryName = "Paralegal"
                         },
                         new
                         {
-                            CategoryID = 43,
-                            CategoryName = "Pharmacy Technician",
-                            CategoryPrefix = "PHRX"
+                            CategoryPrefix = "PHRX",
+                            CategoryName = "Pharmacy Technician"
                         },
                         new
                         {
-                            CategoryID = 44,
-                            CategoryName = "Philosophy",
-                            CategoryPrefix = "PHIL"
+                            CategoryPrefix = "PHIL",
+                            CategoryName = "Philosophy"
                         },
                         new
                         {
-                            CategoryID = 45,
-                            CategoryName = "Physical Education",
-                            CategoryPrefix = "PHED"
+                            CategoryPrefix = "PHED",
+                            CategoryName = "Physical Education"
                         },
                         new
                         {
-                            CategoryID = 46,
-                            CategoryName = "Physical Science",
-                            CategoryPrefix = "PSCI"
+                            CategoryPrefix = "PSCI",
+                            CategoryName = "Physical Science"
                         },
                         new
                         {
-                            CategoryID = 47,
-                            CategoryName = "Physical Therapist Asst",
-                            CategoryPrefix = "PTAT"
+                            CategoryPrefix = "PTAT",
+                            CategoryName = "Physical Therapist Asst"
                         },
                         new
                         {
-                            CategoryID = 48,
-                            CategoryName = "Physics",
-                            CategoryPrefix = "PHYS"
+                            CategoryPrefix = "PHYS",
+                            CategoryName = "Physics"
                         },
                         new
                         {
-                            CategoryID = 49,
-                            CategoryName = "Political Science",
-                            CategoryPrefix = "POLS"
+                            CategoryPrefix = "POLS",
+                            CategoryName = "Political Science"
                         },
                         new
                         {
-                            CategoryID = 50,
-                            CategoryName = "Psychology",
-                            CategoryPrefix = "PSYC"
+                            CategoryPrefix = "PSYC",
+                            CategoryName = "Psychology"
                         },
                         new
                         {
-                            CategoryID = 51,
-                            CategoryName = "Reading",
-                            CategoryPrefix = "READ"
+                            CategoryPrefix = "READ",
+                            CategoryName = "Reading"
                         },
                         new
                         {
-                            CategoryID = 52,
-                            CategoryName = "Religion",
-                            CategoryPrefix = "RELS"
+                            CategoryPrefix = "RELS",
+                            CategoryName = "Religion"
                         },
                         new
                         {
-                            CategoryID = 53,
-                            CategoryName = "Respiratory Care",
-                            CategoryPrefix = "RESP"
+                            CategoryPrefix = "RESP",
+                            CategoryName = "Respiratory Care"
                         },
                         new
                         {
-                            CategoryID = 54,
-                            CategoryName = "Social Work",
-                            CategoryPrefix = "SWRK"
+                            CategoryPrefix = "SWRK",
+                            CategoryName = "Social Work"
                         },
                         new
                         {
-                            CategoryID = 55,
-                            CategoryName = "Sociology",
-                            CategoryPrefix = "SOCI"
+                            CategoryPrefix = "SOCI",
+                            CategoryName = "Sociology"
                         },
                         new
                         {
-                            CategoryID = 56,
-                            CategoryName = "Spanish",
-                            CategoryPrefix = "SPAN"
+                            CategoryPrefix = "SPAN",
+                            CategoryName = "Spanish"
                         },
                         new
                         {
-                            CategoryID = 57,
-                            CategoryName = "Special Education",
-                            CategoryPrefix = "SPED"
+                            CategoryPrefix = "SPED",
+                            CategoryName = "Special Education"
                         },
                         new
                         {
-                            CategoryID = 58,
-                            CategoryName = "Surgical Technology",
-                            CategoryPrefix = "SURG"
+                            CategoryPrefix = "SURG",
+                            CategoryName = "Surgical Technology"
                         },
                         new
                         {
-                            CategoryID = 59,
-                            CategoryName = "Theatre",
-                            CategoryPrefix = "THEA"
+                            CategoryPrefix = "THEA",
+                            CategoryName = "Theatre"
                         },
                         new
                         {
-                            CategoryID = 60,
-                            CategoryName = "Women/Gender Studies",
-                            CategoryPrefix = "WGST"
+                            CategoryPrefix = "WGST",
+                            CategoryName = "Women/Gender Studies"
                         });
                 });
 
             modelBuilder.Entity("Nursing_Student_Vetting.Models.Student", b =>
                 {
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -493,7 +426,7 @@ namespace Nursing_Student_Vetting.Migrations
                     b.HasData(
                         new
                         {
-                            StudentID = 1001,
+                            StudentID = "W00001001",
                             Address = "123 Example St",
                             DateOfBirth = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "john.doe@example.com",
@@ -506,7 +439,7 @@ namespace Nursing_Student_Vetting.Migrations
                         },
                         new
                         {
-                            StudentID = 1002,
+                            StudentID = "W00001002",
                             Address = "456 Example Ave",
                             DateOfBirth = new DateTime(1999, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jane.smith@example.com",
@@ -524,19 +457,19 @@ namespace Nursing_Student_Vetting.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int")
+                    b.Property<string>("CategoryPrefix")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnOrder(1);
 
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int")
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnOrder(2);
 
                     b.Property<string>("LetterGrade")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ClassID", "CategoryID", "StudentID");
+                    b.HasKey("ClassID", "CategoryPrefix", "StudentID");
 
                     b.HasIndex("StudentID");
 
@@ -546,29 +479,29 @@ namespace Nursing_Student_Vetting.Migrations
                         new
                         {
                             ClassID = 2010,
-                            CategoryID = 8,
-                            StudentID = 1001,
+                            CategoryPrefix = "BIOL",
+                            StudentID = "W00001001",
                             LetterGrade = "B"
                         },
                         new
                         {
                             ClassID = 1010,
-                            CategoryID = 1,
-                            StudentID = 1002,
+                            CategoryPrefix = "ACCT",
+                            StudentID = "W00001002",
                             LetterGrade = "A"
                         },
                         new
                         {
                             ClassID = 2010,
-                            CategoryID = 8,
-                            StudentID = 1002,
+                            CategoryPrefix = "BIOL",
+                            StudentID = "W00001002",
                             LetterGrade = "C"
                         },
                         new
                         {
                             ClassID = 1010,
-                            CategoryID = 1,
-                            StudentID = 1001,
+                            CategoryPrefix = "ACCT",
+                            StudentID = "W00001001",
                             LetterGrade = "A"
                         });
                 });
@@ -581,8 +514,8 @@ namespace Nursing_Student_Vetting.Migrations
                     b.Property<int>("AttemptNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
@@ -598,28 +531,28 @@ namespace Nursing_Student_Vetting.Migrations
                         {
                             TestID = 1,
                             AttemptNumber = 1,
-                            StudentID = 1001,
+                            StudentID = "W00001001",
                             Score = 22
                         },
                         new
                         {
                             TestID = 2,
                             AttemptNumber = 1,
-                            StudentID = 1001,
+                            StudentID = "W00001001",
                             Score = 74
                         },
                         new
                         {
                             TestID = 2,
                             AttemptNumber = 2,
-                            StudentID = 1001,
+                            StudentID = "W00001002",
                             Score = 94
                         },
                         new
                         {
                             TestID = 2,
                             AttemptNumber = 1,
-                            StudentID = 1002,
+                            StudentID = "W00001002",
                             Score = 92
                         });
                 });
@@ -662,7 +595,7 @@ namespace Nursing_Student_Vetting.Migrations
                 {
                     b.HasOne("Nursing_Student_Vetting.Models.ClassCategories", "Category")
                         .WithMany("Classes")
-                        .HasForeignKey("CategoryID")
+                        .HasForeignKey("CategoryPrefix")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -679,7 +612,7 @@ namespace Nursing_Student_Vetting.Migrations
 
                     b.HasOne("Nursing_Student_Vetting.Models.Class", "Class")
                         .WithMany("StudentClasses")
-                        .HasForeignKey("ClassID", "CategoryID")
+                        .HasForeignKey("ClassID", "CategoryPrefix")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

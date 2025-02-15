@@ -14,6 +14,9 @@ ViewData["Title"] = "Class List";
     <thead>
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.CategoryPrefix)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ClassID)
         </th>
         <th>
@@ -33,6 +36,9 @@ ViewData["Title"] = "Class List";
     {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => classItem.CategoryPrefix)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => classItem.ClassID)
         </td>
         <td>
@@ -45,9 +51,11 @@ ViewData["Title"] = "Class List";
             @Html.DisplayFor(modelItem => classItem.IsRequired)
         </td>
         <td>
-            <a asp-action="Update" asp-route-id="@classItem.ClassID">Edit</a> |
-            <a asp-action="Details" asp-route-id="@classItem.ClassID">Details</a> |
-            <a asp-action="Delete" asp-route-id="@classItem.ClassID">Delete</a>
+                    <a asp-action="Update" asp-route-itemid="classItem.ClassID" asp-route-id="@classItem.CategoryPrefix">Edit</a> |
+                    <a asp-action="Details" asp-route-itemid="classItem.ClassID" asp-route-id="@classItem.CategoryPrefix">Details</a> |
+                    <form asp-action="Delete" asp-route-itemid="classItem.ClassID" asp-route-id="@classItem.CategoryPrefix" method="post" onsubmit="return confirm('Are you sure you want to delete @classItem.ClassName?');">
+                        <button type="submit" class="btn btn-link text-danger">Delete</button>
+                    </form>
         </td>
     </tr>
     }
