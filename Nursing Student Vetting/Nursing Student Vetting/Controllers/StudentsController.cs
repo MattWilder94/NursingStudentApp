@@ -105,22 +105,5 @@ namespace Nursing_Student_Vetting.Controllers
                 return View("List"); // "List" will probably be changed to addstudent.html
             }
         }
-
-        [HttpPost] // basic delete action
-        public IActionResult Delete(int id)
-        {
-            var student = _context.Students.FirstOrDefault(p => p.StudentID == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                _context.Students.Remove(student);
-                _context.SaveChanges();
-                return RedirectToAction("List");
-            }
-        }
-        
     }
 }
