@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Nursing_Student_Vetting.Models.Student>
 
 @{
+
     ViewData["Title"] = "Student List";
     var sortOrder = ViewData["CurrentSort"] as string;
     var nameSortParam = sortOrder == "Name" ? "name_desc" : "Name";
@@ -58,7 +59,11 @@
                 </td>
                 <td>
                     <a asp-action="Update" asp-route-id="@student.StudentID">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@student.StudentID">Delete</a>
+                    <a asp-action="Details" asp-route-id="@student.StudentID">Details</a> |
+                    <form asp-action="Delete" asp-route-id="@student.StudentID" method="post" onsubmit="return confirm('Are you sure you want to delete @student.FirstName @student.LastName?');">
+                        <button type="submit" class="btn btn-link text-danger">Delete</button>
+                    </form>
+
                 </td>
             </tr>
         }
