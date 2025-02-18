@@ -31,8 +31,10 @@ namespace Nursing_Student_Vetting.Controllers
             }
 
             // Ensure these are never null by initializing them
-            ViewBag.Classes = await _context.Classes.ToListAsync() ?? new List<Class>();
             ViewBag.CategoryPrefixes = _context.Classes.Select(c => c.CategoryPrefix).Distinct().ToList() ?? new List<string>();
+            ViewBag.Classes = await _context.Classes
+                .Select(c => new { c.ClassID, DisplayText = c.CategoryPrefix + " - " + c.ClassID })
+                .ToListAsync();
 
             return View(studentClass);
         }
