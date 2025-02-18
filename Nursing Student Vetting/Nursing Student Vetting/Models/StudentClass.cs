@@ -14,13 +14,11 @@ namespace Nursing_Student_Vetting.Models
         [Key, Column(Order = 2)]
         public string StudentID { get; set; }
 
-        public Class Class { get; set; }
+        public Class? Class { get; set; }
 
-        public Student Student { get; set; }
+        public Student? Student { get; set; }
 
         [Required(ErrorMessage = "Please enter a letter grade")]
-        
-        // Not sure if this is auto implemented of not??
         public string LetterGrade { get; set; }
 
     }

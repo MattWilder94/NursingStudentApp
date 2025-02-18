@@ -113,6 +113,21 @@ namespace Nursing_Student_Vetting.Controllers
                 return RedirectToAction(nameof(List));
             }
         }
+        public async Task<IActionResult> Details(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            Student? student = await _context.Students
+                .Include(s => s.StudentClasses)
+                    .ThenInclude(sc => sc.Class)
+                .Include(s => s.StudentTests)
+                    .ThenInclude(st => st.Test)
+                .FirstOrDefaultAsync(m => m.StudentID == id); 
+            return View(student);
+        }
         
     }
 }
