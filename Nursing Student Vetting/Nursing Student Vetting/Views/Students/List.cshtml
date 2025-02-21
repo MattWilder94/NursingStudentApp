@@ -49,7 +49,7 @@
                     @Html.DisplayFor(modelItem => student.StudentID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => student.LastName), @Html.DisplayFor(modelItem => student.FirstName)
+                    <a asp-action="Details" asp-route-id="@student.StudentID">@Html.DisplayFor(modelItem => student.LastName), @Html.DisplayFor(modelItem => student.FirstName)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => student.Email)
@@ -59,8 +59,7 @@
                 </td>
                 <td>
                     <a asp-action="Update" asp-route-id="@student.StudentID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@student.StudentID">Details</a> |
-                    <form asp-action="Delete" asp-route-id="@student.StudentID" method="post" onsubmit="return confirm('Are you sure you want to delete @student.FirstName @student.LastName?');">
+                    <form asp-action="Delete" asp-route-id="@student.StudentID" method="post" onsubmit="return confirm('Are you sure you want to delete @student.FirstName @student.LastName?');" style="display:inline;">
                         <button type="submit" class="btn btn-link text-danger">Delete</button>
                     </form>
 

@@ -47,7 +47,7 @@ namespace Nursing_Student_Vetting.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool exists = await _context.Classes.AnyAsync(p => p.ClassID == classItem.ClassID);
+                bool exists = await _context.Classes.AnyAsync(p => p.ClassID == classItem.ClassID && p.CategoryPrefix == classItem.CategoryPrefix);
 
                 if (!exists)        // if student is new
                 {
