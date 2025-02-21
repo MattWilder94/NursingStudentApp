@@ -72,6 +72,7 @@ namespace Nursing_Student_Vetting.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Student student) 
         {
 
@@ -99,6 +100,7 @@ namespace Nursing_Student_Vetting.Controllers
         }
 
         [HttpPost] // basic delete action
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(string id)
         {
             var student = _context.Students.FirstOrDefault(p => p.StudentID == id);
@@ -121,11 +123,14 @@ namespace Nursing_Student_Vetting.Controllers
             }
 
             Student? student = await _context.Students
-                .Include(s => s.StudentClasses)
-                    .ThenInclude(sc => sc.Class)
-                .Include(s => s.StudentTests)
-                    .ThenInclude(st => st.Test)
-                .FirstOrDefaultAsync(m => m.StudentID == id); 
+                .Include(s => s.StudentClasses).ThenInclude(sc => sc.Class)
+                .Include(s => s.StudentTests).ThenInclude(st => st.Test)
+                .FirstOrDefaultAsync(m => m.StudentID == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
             return View(student);
         }
         

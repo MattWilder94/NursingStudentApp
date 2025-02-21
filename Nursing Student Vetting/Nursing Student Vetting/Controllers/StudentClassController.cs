@@ -40,20 +40,11 @@ namespace Nursing_Student_Vetting.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(StudentClass studentClass)
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(studentClass.StudentID) || string.IsNullOrEmpty(studentClass.CategoryPrefix) || studentClass.ClassID == 0)
-                {
-                    ModelState.AddModelError(string.Empty, "All fields are required.");
-
-                    ViewBag.Classes = await _context.Classes.ToListAsync() ?? new List<Class>();
-                    ViewBag.CategoryPrefixes = _context.Classes.Select(c => c.CategoryPrefix).Distinct().ToList() ?? new List<string>();
-
-                    return View(studentClass);
-                }
-
                 // Check if the StudentClass entry already exists
                 var existingStudentClass = await _context.StudentClasses
                     .FirstOrDefaultAsync(sc =>
@@ -96,5 +87,23 @@ namespace Nursing_Student_Vetting.Controllers
             return View(studentClass);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string studentId, int classId, string categoryPrefix)
+        {
+            StudentClass? studentClass = await _context.StudentClasses
+                .FirstOrDefaultAsync(sc => sc.StudentID == studentId && sc.ClassID == classId && sc.CategoryPrefix == categoryPrefix);
+            if (studentClass == null)
+            {
+                return NotFound();
+            }
+
+            _context.StudentClasses.Remove(studentClass);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(StudentsController.Details),
+                typeof(StudentsController).Name.Replace("Controller", ""),
+                new { id = studentId });
+        }
     }
 }
